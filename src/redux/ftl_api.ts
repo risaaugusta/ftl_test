@@ -44,8 +44,8 @@ export const ftlApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getMeetings: builder.query<Meeting[], void>({
-      query: () => '', // karena BASE_URL sudah lengkap
-      transformResponse: (response: MeetingsResponse) => response.data, // ambil array `data` saja
+      query: () => '',  
+      transformResponse: (response: MeetingsResponse) => response.data,  
     }),
   }),
 });

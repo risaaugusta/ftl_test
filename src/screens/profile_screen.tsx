@@ -2,32 +2,26 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native';
 import { useGetMeetingsQuery } from '../redux/ftl_api';
 
-const meetings = [
-  { time: '08:00 - 09:00', room: 'Squats Room' },
-  { time: '10:00 - 12:00', room: 'Lunges Room' },
-];
-
 const ProfileScreen = () => { 
   const { data: meetings = [], isLoading, isError } = useGetMeetingsQuery();
 
   // const { data: meetings, isLoading, isError } = useGetMeetingsQuery();
 
+  if (isLoading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </SafeAreaView>
+    );
+  }
 
-  // if (isLoading) {
-  //   return (
-  //     <SafeAreaView style={styles.container}>
-  //       <ActivityIndicator size="large" color="#0000ff" />
-  //     </SafeAreaView>
-  //   );
-  // }
-
-  // if (isError) {
-  //   return (
-  //     <SafeAreaView style={styles.container}>
-  //       <Text>Error loading meetings</Text>
-  //     </SafeAreaView>
-  //   );
-  // }
+  if (isError) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text>Error loading meetings</Text>
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>HOME/RUANG MEETING</Text>
