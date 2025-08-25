@@ -8,4 +8,7 @@ Risa Augusta @2025
 # Tech Stack
 React Native, React Redux (without react expo)
 
+# DEMO
+https://drive.google.com/file/d/1ZjoxBPVZUTwDyJK3EHQaJJLaNmgyuMY-/view?usp=sharing
+
 
