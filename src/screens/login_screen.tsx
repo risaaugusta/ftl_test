@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 
 import { useNavigation, NavigationProp } from '@react-navigation/native';
+
 // import ProfileScreen from './profile_screen';
 
 // Define your stack param list
@@ -75,7 +76,7 @@ function LoginScreen() {
         <Button title="Submit" onPress={handleSubmit} />        
       )} */}
 
-              <Button title="Next" onPress={() => navigation.navigate('Profile')} />
+              <Button title="Sign in" onPress={() => navigation.navigate('Profile')} />
 
     </View>
   );

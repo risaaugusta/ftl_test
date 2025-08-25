@@ -6,6 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 import LoginScreen from './src/screens/login_screen';
 import ProfileScreen from './src/screens/profile_screen';
+import { Provider } from 'react-redux';
+import { store } from './src/redux/store';
 
 enableScreens();
 
@@ -22,6 +24,7 @@ function WelcomeScreen({ navigation }: any) {
 
 function AppContent() {
   return (
+    <Provider store={store}> 
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
@@ -29,6 +32,7 @@ function AppContent() {
         <Stack.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 

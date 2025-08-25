@@ -1,12 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native';
+import { useGetMeetingsQuery } from '../redux/ftl_api';
 
 const meetings = [
   { time: '08:00 - 09:00', room: 'Squats Room' },
   { time: '10:00 - 12:00', room: 'Lunges Room' },
 ];
 
-const ProfileScreen = () => {
+const ProfileScreen = () => { 
+  const { data: meetings = [], isLoading, isError } = useGetMeetingsQuery();
+
+  // const { data: meetings, isLoading, isError } = useGetMeetingsQuery();
+
+
+  // if (isLoading) {
+  //   return (
+  //     <SafeAreaView style={styles.container}>
+  //       <ActivityIndicator size="large" color="#0000ff" />
+  //     </SafeAreaView>
+  //   );
+  // }
+
+  // if (isError) {
+  //   return (
+  //     <SafeAreaView style={styles.container}>
+  //       <Text>Error loading meetings</Text>
+  //     </SafeAreaView>
+  //   );
+  // }
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>HOME/RUANG MEETING</Text>
@@ -22,10 +43,10 @@ const ProfileScreen = () => {
       </View>
  
       <Text style={styles.scheduleTitle}>Jadwal Ruang Meeting Hari Ini</Text>
-      {meetings.map((meeting, index) => (
+      {meetings?.map((meeting, index) => (
         <View key={index} style={styles.meetingCard}>
-          <Text style={styles.meetingTime}>{meeting.time}</Text>
-          <Text style={styles.meetingRoom}>{meeting.room}</Text>
+          <Text style={styles.meetingTime}>{meeting.waktu_mulai} - {meeting.waktu_selesai}</Text>
+          <Text style={styles.meetingRoom}>{meeting.nama_ruangan}</Text>
         </View>
       ))}
  
