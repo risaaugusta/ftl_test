@@ -1,47 +1,60 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native';
+import { View,TextInput, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator, Pressable } from 'react-native';
 import { useGetMeetingsQuery } from '../redux/ftl_api';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
+import React, { useState } from 'react';
+ import DateTimePicker from '@react-native-community/datetimepicker';
  
  
 type RootStackParamList = { 
   Form: undefined;
-  Schedule: undefined;
 };
 
-const ProfileScreen = () => { 
+const ScheduleScreen = () => { 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { data: meetings = [], isLoading, isError } = useGetMeetingsQuery();
+  const [ruangMeeting, setRuangMeeting] = useState('');
+  const [tanggalMeeting, setTanggalMeeting] = useState('');
+  const [showPicker, setShowPicker] = useState(false);
+ 
 
-  // const { data: meetings, isLoading, isError } = useGetMeetingsQuery();
-
-  if (isLoading) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </SafeAreaView>
-    );
-  }
-
-  if (isError) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text>Error loading meetings</Text>
-      </SafeAreaView>
-    );
-  }
+      const toggleDatePicker = () => {
+        setShowPicker(!showPicker);
+      };
   return (
     <SafeAreaView style={styles.container}> 
 
-      <View style={styles.profile}>
-        <View style={styles.avatar}>
-          <Text style={styles.avatarText}>Y</Text>
-        </View>
-        <View>
-          <Text style={styles.name}>Yosi</Text>
-          <Text style={styles.role}>Web Developer</Text>
-        </View>
+      <View style={styles.header}>
+        <TextInput
+                style={styles.input}
+                placeholder="Ruang Meeting"
+                value={ruangMeeting}
+                onChangeText={setRuangMeeting}
+                autoCapitalize="none" 
+              />
+
+              <Pressable onPress={toggleDatePicker}>
+        <TextInput
+                style={styles.input}
+                placeholder="Tanggal Meeting"
+                value={tanggalMeeting}
+                onChangeText={setTanggalMeeting}
+                autoCapitalize="none" 
+              />
+
+              </Pressable>
+
+               {showPicker && (
+            <DateTimePicker
+              value={tanggalMeeting ? new Date(tanggalMeeting) : new Date()}
+              mode="date" 
+              display="default"  
+            //   onChange={onChange}
+            />
+          )}
+        
       </View>
+
+      
  
       <Text style={styles.scheduleTitle}>Jadwal Ruang Meeting Hari Ini</Text>
       {meetings?.map((meeting, index) => (
@@ -51,19 +64,18 @@ const ProfileScreen = () => {
         </View>
       ))}
  
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Schedule')}>
-          <Text style={styles.footerText}>Jadwal Ruang Meeting</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Form')}>
-          <Text style={styles.footerText}>Booking Ruang Meeting</Text>
-        </TouchableOpacity>
-      </View>
+      
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  header: { 
+    paddingVertical: 20,
+    height: 150,
+    backgroundColor: '#ccc',
+    paddingHorizontal: 20,
+  },
   container: { 
     flex: 1,
     backgroundColor: '#fff',
@@ -83,10 +95,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 15,
   },
-  avatarText: {
-    fontSize: 24,
-    color: '#fff',
-    fontWeight: 'bold',
+   input: {
+    height: 40,
+    color: '#000',
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    marginBottom: 16,
+    paddingHorizontal: 8,
+    borderRadius: 4,
   },
   name: {
     fontSize: 18,
@@ -129,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default ScheduleScreen;

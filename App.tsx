@@ -9,6 +9,7 @@ import ProfileScreen from './src/screens/profile_screen';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import FormScreen from './src/screens/form_screen';
+import ScheduleScreen from './src/screens/schedule_screens';
 
 enableScreens();
 
@@ -32,6 +33,7 @@ function AppContent() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Form" component={FormScreen} />
+        <Stack.Screen name="Schedule" component={ScheduleScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>
