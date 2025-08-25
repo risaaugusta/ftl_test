@@ -30,8 +30,7 @@ const ProfileScreen = () => {
     );
   }
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>HOME/RUANG MEETING</Text>
+    <SafeAreaView style={styles.container}> 
 
       <View style={styles.profile}>
         <View style={styles.avatar}>
@@ -64,15 +63,10 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: { 
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal: 20,
-  },
-  header: {
-    marginTop: 20,
-    color: '#A0A0A0',
-    fontWeight: 'bold',
   },
   profile: {
     flexDirection: 'row',
