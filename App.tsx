@@ -8,6 +8,7 @@ import LoginScreen from './src/screens/login_screen';
 import ProfileScreen from './src/screens/profile_screen';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
+import FormScreen from './src/screens/form_screen';
 
 enableScreens();
 
@@ -30,6 +31,7 @@ function AppContent() {
         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Form" component={FormScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

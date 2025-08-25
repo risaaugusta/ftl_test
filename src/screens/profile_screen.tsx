@@ -1,8 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native';
 import { useGetMeetingsQuery } from '../redux/ftl_api';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+ 
+ 
+type RootStackParamList = { 
+  Form: undefined;
+};
 
 const ProfileScreen = () => { 
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { data: meetings = [], isLoading, isError } = useGetMeetingsQuery();
 
   // const { data: meetings, isLoading, isError } = useGetMeetingsQuery();
@@ -48,7 +55,7 @@ const ProfileScreen = () => {
         <TouchableOpacity style={styles.footerButton}>
           <Text style={styles.footerText}>Jadwal Ruang Meeting</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
+        <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Form')}>
           <Text style={styles.footerText}>Booking Ruang Meeting</Text>
         </TouchableOpacity>
       </View>
